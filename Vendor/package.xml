@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+ <name>HTML_QuickForm2</name>
+ <channel>pear.php.net</channel>
+ <summary>PHP5 rewrite of HTML_QuickForm package</summary>
+ <description>PHP5 rewrite of HTML_QuickForm and HTML_QuickForm_Controller packages.
+
+ This package provides methods to create, validate and render HTML forms.
+
+ Features:
+   * Supports all form elements defined by HTML standard, provides several
+     custom elements
+   * Server-side and client-side validation, several common rules provided
+   * Multipage forms (tabbed forms and wizards)
+   * Pluggable elements, rules, renderers and renderer plugins
+
+ Major advantages over PHP4 version:
+   * Most of the package&apos;s functionality is covered by unit tests
+   * DOM-like API for building the form structure, new streamlined API for
+     elements&apos; values handling
+   * Default rendering without tables (inspired by
+     HTML_QuickForm_Renderer_Tableless)
+   * Renderer plugins for elements with complex rendering needs
+   * Ability to chain validation rules with &apos;and&apos; and &apos;or&apos;
+   * Client-side validation can run &quot;live&quot; on changing the form fields,
+     validation errors are displayed near the fields instead of in alert()</description>
+ <lead>
+  <name>Alexey Borzov</name>
+  <user>avb</user>
+  <email>avb@php.net</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Bertrand Mansion</name>
+  <user>mansion</user>
+  <email>golgote@mamasam.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2012-06-26</date>
+ <time>14:15:20</time>
+ <version>
+  <release>2.0.0</release>
+  <api>2.0.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+ <notes>
+* Leftover &apos;foo&apos; no longer stays in grouped element&apos;s name when renaming group
+  named &apos;foo[foo]&apos; (bug #19477)
+* &apos;classes&apos; property of qf.Validator moved to its prototype, making it easier
+  to override
+* Items marked deprecated previously are removed
+ </notes>
+ <contents>
+  <dir name="/">
+   <file md5sum="755c5ebecea61369252880cc1e21a0c1" name="HTML/QuickForm2/Container/Fieldset.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f9612b7fe080d06e36808bce99ddd010" name="HTML/QuickForm2/Container/Group.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="3092348a2cc8d546fed1891ab0c2f8fd" name="HTML/QuickForm2/Container/Repeat.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="eaf5dc0454aa4f2c57ce4d8b18cdc1bb" name="HTML/QuickForm2/Controller/Action/Back.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="0bdab39de7107ea327cc97bab14675e3" name="HTML/QuickForm2/Controller/Action/Direct.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="5cff03491330bbc44a4dae9e69f14860" name="HTML/QuickForm2/Controller/Action/Display.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f88cc2abbe05d68c35e4ececf62f30fb" name="HTML/QuickForm2/Controller/Action/Jump.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="babb06fe8b05dc52c74be0ed0b96bb7a" name="HTML/QuickForm2/Controller/Action/Next.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="1e9041b74869d7beddad26f4e818d37f" name="HTML/QuickForm2/Controller/Action/Submit.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="c054d3a1c685a9d9a1148b7551c05194" name="HTML/QuickForm2/Controller/Action.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="1ba9f99348881a189b778c26ef604d69" name="HTML/QuickForm2/Controller/DefaultAction.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="26f03216d8309a3fe6db8651850ca3c5" name="HTML/QuickForm2/Controller/Page.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="39e893f08d80393f9acddf5975e04be9" name="HTML/QuickForm2/Controller/SessionContainer.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="d9f0fc72e2809ba1403b2f74c0597c64" name="HTML/QuickForm2/DataSource/Array.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="8578d54f59eaee5f7681407b79d3848d" name="HTML/QuickForm2/DataSource/Session.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="cd357825adeaefc5bb6293cbcec95cc0" name="HTML/QuickForm2/DataSource/Submit.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="3bdaa0e4ae84ed786b848310f3102aed" name="HTML/QuickForm2/DataSource/SuperGlobal.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f27ee8d0a73f22e6fed5932c93679ed2" name="HTML/QuickForm2/Element/Button.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="57118a811de57a6e23df206232e3a684" name="HTML/QuickForm2/Element/Date.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="4b98c1e2b8fcf33c0bf5fd9d04e349a6" name="HTML/QuickForm2/Element/Hierselect.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="50270969896d4c5c8ac0f8f8bdd949de" name="HTML/QuickForm2/Element/Input.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="aeaeb1996f572f2b65dd059f8d184061" name="HTML/QuickForm2/Element/InputButton.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="4396baffe94ff028046eb0666310164b" name="HTML/QuickForm2/Element/InputCheckable.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="54f44bec21b6aa18088db39188d8ed97" name="HTML/QuickForm2/Element/InputCheckbox.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="20137d1c66b506d30779d93cb1371931" name="HTML/QuickForm2/Element/InputFile.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="a84c2e85437114ad4357d415227608ee" name="HTML/QuickForm2/Element/InputHidden.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="4e695b0c5a9289e5ac42c04892ead667" name="HTML/QuickForm2/Element/InputImage.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="5eb32be6b70f67bb64f89c9e399665ac" name="HTML/QuickForm2/Element/InputPassword.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="b9e542a40aacc381b18c26d1395a3267" name="HTML/QuickForm2/Element/InputRadio.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="c0d4ad9ef7a9aeaef163b0dd510ee6f8" name="HTML/QuickForm2/Element/InputReset.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f67edfa09699ddc10cc1497e7a9a5b9c" name="HTML/QuickForm2/Element/InputSubmit.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="601fee0e2cda0ae132fea882ded03906" name="HTML/QuickForm2/Element/InputText.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="bccf15e945c6eb43d5988117490d0e6c" name="HTML/QuickForm2/Element/Script.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="1a3fdcb40b536a6de9f680af5af88f72" name="HTML/QuickForm2/Element/Select.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="b85c8ad2c276be253958859ca3204925" name="HTML/QuickForm2/Element/Static.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="6db2c7be3d571b3c214554ac5aa464c2" name="HTML/QuickForm2/Element/Textarea.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="61b70665f223e7e20f53f75ce0c712cb" name="HTML/QuickForm2/MessageProvider/Default.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="980e5a7c0bddc53f7abe90c1843dd430" name="HTML/QuickForm2/MessageProvider/Strftime.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="133d40c402eff214bc6e933104789c48" name="HTML/QuickForm2/Renderer/Array.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f4f44a1308485cf5300330ca4dbcc164" name="HTML/QuickForm2/Renderer/Callback.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="0ffc2115d1719d943581fc696a88e7ba" name="HTML/QuickForm2/Renderer/Default.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="e0082c5c26afb761fad4deeed53eced0" name="HTML/QuickForm2/Renderer/Plugin.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="0f429cf5c8797e188e754cce2b93b95d" name="HTML/QuickForm2/Renderer/Proxy.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="47a309782632854e4c5fc0a6364fa63c" name="HTML/QuickForm2/Renderer/Stub.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="31f9923b5ce751a1ce7782fd50ea032e" name="HTML/QuickForm2/Rule/Callback.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="e6a3d797bf5f679226df8c0cfde470d2" name="HTML/QuickForm2/Rule/Compare.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="e5c452745cf4335d1fe280f6d1b7a99d" name="HTML/QuickForm2/Rule/Each.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="a3ad852dfaa5ac43c420988c3c6535bd" name="HTML/QuickForm2/Rule/Email.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="0ff13a268b1ef538f5f4918a451a9043" name="HTML/QuickForm2/Rule/Empty.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="0180657f2147a5d97de30e087f823858" name="HTML/QuickForm2/Rule/Length.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="780190a9002c13ba219668e15a9f92ca" name="HTML/QuickForm2/Rule/MaxFileSize.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="54c681eae496251b928bf16c677fc387" name="HTML/QuickForm2/Rule/MimeType.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="02154ca3c732fe3703d583b863879f59" name="HTML/QuickForm2/Rule/Nonempty.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="733d5c7b133bacdd2f96e1ad9f45f503" name="HTML/QuickForm2/Rule/NotCallback.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="57683b9cd9b36e8cd46ddf63c1b2a12f" name="HTML/QuickForm2/Rule/NotRegex.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="15def2f505eac6463013e3d3fe3a8b2e" name="HTML/QuickForm2/Rule/Regex.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="6b3f6f0540fcb01d4631e642189d1366" name="HTML/QuickForm2/Rule/Required.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="28046f60855cc10f11d0a51c4a4f5539" name="HTML/QuickForm2/Container.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="e92ecb0f3446bfc33bea8efa5583d04f" name="HTML/QuickForm2/Controller.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="7b650d0fe2d047ca29968be37aaf3652" name="HTML/QuickForm2/DataSource.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f075dc52b8e47c1360cf50a4e289b0ee" name="HTML/QuickForm2/Element.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="45bddc6b2b9530db05462c2c8a2b5ce8" name="HTML/QuickForm2/Exception.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="faf401b6662cf3ec330edb16234d8f5a" name="HTML/QuickForm2/Factory.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="14f2ceddd16ce86123fb9a48141d802e" name="HTML/QuickForm2/JavascriptBuilder.php" role="php">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="cb3dcf78144f016f9856f18cb84f99e4" name="HTML/QuickForm2/Loader.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="d2acbdd1988322ed2529a0d33cf96c1f" name="HTML/QuickForm2/MessageProvider.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="93e8d211b61f5a2e46d4e239ea46c3b2" name="HTML/QuickForm2/Node.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="bbd97a390f409c4e066470633b23439c" name="HTML/QuickForm2/Renderer.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="9bc6ebf49125c7975cc40fbac807cb16" name="HTML/QuickForm2/Rule.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="56e91dd20e3e44d3f0e4002cb7e40463" name="HTML/QuickForm2.php" role="php">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="b1eb66b7e19d77b60e6c569466ee7984" name="tests/QuickForm2/Container/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f0e0dcaaa8ad5ec591fc6a749dd037f7" name="tests/QuickForm2/Container/FieldsetTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="dcf4a3c2cfd9f9d855b3d32812649183" name="tests/QuickForm2/Container/GroupTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="4849212168aa77aa8317c17fbee32ffb" name="tests/QuickForm2/Container/RepeatTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="87d234ba14f6f2a935b6cff5f3d827b7" name="tests/QuickForm2/Controller/Action/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="3adbacb2293ce1000831a07211bfc881" name="tests/QuickForm2/Controller/Action/BackTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="c7b89ab512bf4d342b3aff06e09bee4e" name="tests/QuickForm2/Controller/Action/DirectTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="9044cd6fbfeb7942109897fc3ee2df39" name="tests/QuickForm2/Controller/Action/DisplayTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="2b504fa0892373bdd7b95b2d97bb1259" name="tests/QuickForm2/Controller/Action/JumpTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="2ead95782e10b0a466dc278655c18cb2" name="tests/QuickForm2/Controller/Action/NextTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="01f51dc4c003dbbba060c15ba7e22ffe" name="tests/QuickForm2/Controller/Action/SubmitTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="87299fd31214ba6cecbb6a9a66484ade" name="tests/QuickForm2/Controller/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="cc481cf0dab22b850f71832d155cd0db" name="tests/QuickForm2/Controller/PageTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="5b94618dcb56ae51b9dd28b299ae362b" name="tests/QuickForm2/DataSource/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="e10255af8e6e1561e61c38f031748f32" name="tests/QuickForm2/DataSource/ArrayTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="d59a86ca55bf6978e48a6f8947e28e9f" name="tests/QuickForm2/DataSource/SuperGlobalTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="697b51c345085e2d218db9b733cc4e7d" name="tests/QuickForm2/Element/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="bfef205fbcb664c79c3e356268d9762a" name="tests/QuickForm2/Element/ButtonTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="e929069201b0e8bda960d8f217683b7d" name="tests/QuickForm2/Element/DateTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="337252d3f57a3b9b4426db179e193ebf" name="tests/QuickForm2/Element/HierselectTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="ecaebcee3e3718abb4d3b205aae77f36" name="tests/QuickForm2/Element/InputButtonTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="68333aae4fa816e3ab9a4ef35367455d" name="tests/QuickForm2/Element/InputCheckableTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="21b768e0b8751a0befaa862e4758f428" name="tests/QuickForm2/Element/InputCheckboxTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="534260212925ed7597be21faa15d8465" name="tests/QuickForm2/Element/InputFileTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="bf77c110bb405b4a7ef9c2f2d6c143a2" name="tests/QuickForm2/Element/InputHiddenTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="3301a448c2c630fe8f006ca1efb065e8" name="tests/QuickForm2/Element/InputImageTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f5688e349ec0bd08fef124210114d1af" name="tests/QuickForm2/Element/InputPasswordTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="2fc27dad312185b9ed01c6ee6e2cbaed" name="tests/QuickForm2/Element/InputResetTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="32cff865fe6537331c4b30a20a9dbfca" name="tests/QuickForm2/Element/InputSubmitTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="2c33572d45c7eaa2a99c67ff96d9693e" name="tests/QuickForm2/Element/InputTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="926142e59e463b57b6d6d79c91901fcd" name="tests/QuickForm2/Element/SelectTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="c252b1198f427bdf06e3cffa7d674b48" name="tests/QuickForm2/Element/StaticTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="452eccbc1c46508a968401eea0fdf957" name="tests/QuickForm2/Element/TextareaTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="2f7d6f4b100fa4cb94d94ecb2eec6355" name="tests/QuickForm2/Renderer/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="e1bd7d5773024b2ddbc80655c2a036c3" name="tests/QuickForm2/Renderer/ArrayTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="2121f064af2c81b2a184e709ab5cc633" name="tests/QuickForm2/Renderer/CallbackTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="8418aef7b3a43b99e67f25fbade32ad0" name="tests/QuickForm2/Renderer/DefaultTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="f0dd44bfbc05f1c0d11d616b8c23565b" name="tests/QuickForm2/Renderer/StubTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="54f30ce6ea3f51027f3ec027c6d8eed7" name="tests/QuickForm2/Rule/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="13511037f83d4280d4d53e7d88138a59" name="tests/QuickForm2/Rule/CallbackTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="9f768f1aeec4a7f6c5619aa069527f83" name="tests/QuickForm2/Rule/CompareTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="18dcb8bac9ec218eda42a91f204fb89e" name="tests/QuickForm2/Rule/EachTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="a9f4ca2e36148763b20c512315dad76f" name="tests/QuickForm2/Rule/EmailTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="ef58cd56dac04a1545cccd7e091fd46a" name="tests/QuickForm2/Rule/EmptyTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="d8567d95238367a8c6359b71166b474c" name="tests/QuickForm2/Rule/LengthTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="4c2797358b2f63f72db2d0777b412ddd" name="tests/QuickForm2/Rule/MaxFileSizeTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="b9bc78c975aa0c63ec778b393e2a263b" name="tests/QuickForm2/Rule/MimeTypeTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="9a4c1be0bf193c34e2aa5fa65f28d5d3" name="tests/QuickForm2/Rule/NonemptyTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="727af84e7334920a8d6b88f9e2f27687" name="tests/QuickForm2/Rule/NotCallbackTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="d214f03a834fd51ad7349891d7cd3179" name="tests/QuickForm2/Rule/NotRegexTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="a9a563710ce5fc52570b1a6d09e0483d" name="tests/QuickForm2/Rule/RegexTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="80c14cfa91e2970eb42605bd93fb23d8" name="tests/QuickForm2/Rule/RequiredTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="89f8b6eb659b80f81b22a04f27e3a863" name="tests/QuickForm2/_files/1024-bytes.upload" role="test" />
+   <file md5sum="8dad26d3ebfbb05a1a80801c151da733" name="tests/QuickForm2/_files/FakeElement.php" role="test" />
+   <file md5sum="b1da24f910611bcae654bf2954a0b514" name="tests/QuickForm2/_files/FakeRule.php" role="test" />
+   <file md5sum="9a18c4ee9d95abcfdb1472cae20984cd" name="tests/QuickForm2/_files/InvalidFile.php" role="test" />
+   <file md5sum="d9b8ed9b248e81d031051c7189a00ccf" name="tests/QuickForm2/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="6ea8b635b6fe5d93c7a3af80b00e25a7" name="tests/QuickForm2/ContainerTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="ea39c6c9f052ffab6b06372bd60e70c3" name="tests/QuickForm2/ContainerOverloadTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="8cd91050d4d69d2b12ae9d1328df2552" name="tests/QuickForm2/ControllerTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="3f035f81c4b44c114b24f5e6a284f933" name="tests/QuickForm2/ElementTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="40b5952e02ddf50972c74ae2e1e0fafa" name="tests/QuickForm2/FactoryTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="752f7de9461bceae1eb90e523db527df" name="tests/QuickForm2/FilterTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="1e9ba6301ce226677fea6981dc8a9304" name="tests/QuickForm2/JavascriptBuilderTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="a8775cefc5923aec268ae8029bb6e462" name="tests/QuickForm2/NodeTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="ae3a18918dd86623d5fa8de5996e7416" name="tests/QuickForm2/RendererTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="c395fab6ae0924ec34f07c204b0de32c" name="tests/QuickForm2/RuleTest.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="369ce3c3aa4afdd42b7e54c6e3d2a313" name="tests/AllTests.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="ae770da9a27fb831ffcf13e7ae2e8114" name="tests/QuickForm2Test.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="9a80fe04283bada317c165f82614629a" name="tests/TestHelper.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="04f450bc64444327531eaf9cd35bc10c" name="docs/examples/controller/simple.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="335af93ea020122aa8057bb5ea241577" name="docs/examples/controller/tabbed.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="95861268db7d136ad2762b6b126fe613" name="docs/examples/controller/wizard.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="9e09b3a3600889fd09c044587f93eb18" name="docs/examples/js/dualselect.js" role="doc" />
+   <file md5sum="5e5d227803fb9ba1028ba0c275eb215b" name="docs/examples/js/hierselect-server.php" role="doc" />
+   <file md5sum="8ccb81f485d0778b56bcdae4b872325e" name="docs/examples/renderers/templates/array-twig.tpl" role="doc" />
+   <file md5sum="7a930d8573cbe42b62f5e1e82c0755a6" name="docs/examples/renderers/array-twig.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="7aa4773f256af56c17e19b5cb2a30f5a" name="docs/examples/support/hierselect-loader.php" role="doc" />
+   <file md5sum="5517fefdc359225e0d1e31e29adaa930" name="docs/examples/basic-elements.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="e40f0fd2a669d1b01891269cfb52270e" name="docs/examples/builtin-rules.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="3410c4fee0e3e1018be937a72edc308d" name="docs/examples/default-renderer.php" role="doc" />
+   <file md5sum="d37ac63c0a33703bfa6d87037ba87317" name="docs/examples/dualselect.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="35314245dc190b0de0d9d6553ad57598" name="docs/examples/hierselect-ajax.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="b9dd6d6004505d72e41064e3eac08597" name="docs/examples/repeat.php" role="doc">
+    <tasks:replace from="@data_dir@" to="data_dir" type="pear-config" />
+   </file>
+   <file md5sum="3abc375e46f37181a0aea8724e031e70" name="data/js/min/quickform.js" role="data">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="ae2afd346be364dca00ae3cd1a1cd921" name="data/js/min/quickform-hierselect.js" role="data">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="753b46d399aedc37f7229537311788f8" name="data/js/min/quickform-repeat.js" role="data">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="9feef878e0b7960a5861011e6333bf74" name="data/js/quickform.js" role="data">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="7390b88469c5001ad97632c245c81c65" name="data/js/quickform-hierselect.js" role="data">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="4b1267fd5dbf25202e5e50df3ce00d7d" name="data/js/quickform-repeat.js" role="data">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+   <file md5sum="9c757ecfe0cc3ddcbd237023b99cdbfe" name="data/quickform.css" role="data" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.5.4</min>
+   </pearinstaller>
+   <package>
+    <name>HTML_Common2</name>
+    <channel>pear.php.net</channel>
+    <min>2.0.0</min>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease>
+  <filelist>
+   <install as="quickform.css" name="data/quickform.css" />
+   <install as="js/quickform.js" name="data/js/quickform.js" />
+   <install as="js/quickform-hierselect.js" name="data/js/quickform-hierselect.js" />
+   <install as="js/quickform-repeat.js" name="data/js/quickform-repeat.js" />
+   <install as="js/min/quickform.js" name="data/js/min/quickform.js" />
+   <install as="js/min/quickform-hierselect.js" name="data/js/min/quickform-hierselect.js" />
+   <install as="js/min/quickform-repeat.js" name="data/js/min/quickform-repeat.js" />
+   <install as="examples/controller/simple.php" name="docs/examples/controller/simple.php" />
+   <install as="examples/controller/tabbed.php" name="docs/examples/controller/tabbed.php" />
+   <install as="examples/controller/wizard.php" name="docs/examples/controller/wizard.php" />
+   <install as="examples/js/dualselect.js" name="docs/examples/js/dualselect.js" />
+   <install as="examples/js/hierselect-server.php" name="docs/examples/js/hierselect-server.php" />
+   <install as="examples/renderers/array-twig.php" name="docs/examples/renderers/array-twig.php" />
+   <install as="examples/renderers/templates/array-twig.tpl" name="docs/examples/renderers/templates/array-twig.tpl" />
+   <install as="examples/support/hierselect-loader.php" name="docs/examples/support/hierselect-loader.php" />
+   <install as="examples/basic-elements.php" name="docs/examples/basic-elements.php" />
+   <install as="examples/builtin-rules.php" name="docs/examples/builtin-rules.php" />
+   <install as="examples/default-renderer.php" name="docs/examples/default-renderer.php" />
+   <install as="examples/dualselect.php" name="docs/examples/dualselect.php" />
+   <install as="examples/hierselect-ajax.php" name="docs/examples/hierselect-ajax.php" />
+   <install as="examples/repeat.php" name="docs/examples/repeat.php" />
+   <install as="AllTests.php" name="tests/AllTests.php" />
+   <install as="QuickForm2Test.php" name="tests/QuickForm2Test.php" />
+   <install as="TestHelper.php" name="tests/TestHelper.php" />
+   <install as="QuickForm2/AllTests.php" name="tests/QuickForm2/AllTests.php" />
+   <install as="QuickForm2/ContainerOverloadTest.php" name="tests/QuickForm2/ContainerOverloadTest.php" />
+   <install as="QuickForm2/ContainerTest.php" name="tests/QuickForm2/ContainerTest.php" />
+   <install as="QuickForm2/ControllerTest.php" name="tests/QuickForm2/ControllerTest.php" />
+   <install as="QuickForm2/ElementTest.php" name="tests/QuickForm2/ElementTest.php" />
+   <install as="QuickForm2/FactoryTest.php" name="tests/QuickForm2/FactoryTest.php" />
+   <install as="QuickForm2/FilterTest.php" name="tests/QuickForm2/FilterTest.php" />
+   <install as="QuickForm2/JavascriptBuilderTest.php" name="tests/QuickForm2/JavascriptBuilderTest.php" />
+   <install as="QuickForm2/NodeTest.php" name="tests/QuickForm2/NodeTest.php" />
+   <install as="QuickForm2/RendererTest.php" name="tests/QuickForm2/RendererTest.php" />
+   <install as="QuickForm2/RuleTest.php" name="tests/QuickForm2/RuleTest.php" />
+   <install as="QuickForm2/Container/AllTests.php" name="tests/QuickForm2/Container/AllTests.php" />
+   <install as="QuickForm2/Container/FieldsetTest.php" name="tests/QuickForm2/Container/FieldsetTest.php" />
+   <install as="QuickForm2/Container/GroupTest.php" name="tests/QuickForm2/Container/GroupTest.php" />
+   <install as="QuickForm2/Container/RepeatTest.php" name="tests/QuickForm2/Container/RepeatTest.php" />
+   <install as="QuickForm2/Controller/AllTests.php" name="tests/QuickForm2/Controller/AllTests.php" />
+   <install as="QuickForm2/Controller/PageTest.php" name="tests/QuickForm2/Controller/PageTest.php" />
+   <install as="QuickForm2/Controller/Action/AllTests.php" name="tests/QuickForm2/Controller/Action/AllTests.php" />
+   <install as="QuickForm2/Controller/Action/BackTest.php" name="tests/QuickForm2/Controller/Action/BackTest.php" />
+   <install as="QuickForm2/Controller/Action/DirectTest.php" name="tests/QuickForm2/Controller/Action/DirectTest.php" />
+   <install as="QuickForm2/Controller/Action/DisplayTest.php" name="tests/QuickForm2/Controller/Action/DisplayTest.php" />
+   <install as="QuickForm2/Controller/Action/JumpTest.php" name="tests/QuickForm2/Controller/Action/JumpTest.php" />
+   <install as="QuickForm2/Controller/Action/NextTest.php" name="tests/QuickForm2/Controller/Action/NextTest.php" />
+   <install as="QuickForm2/Controller/Action/SubmitTest.php" name="tests/QuickForm2/Controller/Action/SubmitTest.php" />
+   <install as="QuickForm2/DataSource/AllTests.php" name="tests/QuickForm2/DataSource/AllTests.php" />
+   <install as="QuickForm2/DataSource/ArrayTest.php" name="tests/QuickForm2/DataSource/ArrayTest.php" />
+   <install as="QuickForm2/DataSource/SuperGlobalTest.php" name="tests/QuickForm2/DataSource/SuperGlobalTest.php" />
+   <install as="QuickForm2/Element/AllTests.php" name="tests/QuickForm2/Element/AllTests.php" />
+   <install as="QuickForm2/Element/ButtonTest.php" name="tests/QuickForm2/Element/ButtonTest.php" />
+   <install as="QuickForm2/Element/DateTest.php" name="tests/QuickForm2/Element/DateTest.php" />
+   <install as="QuickForm2/Element/HierselectTest.php" name="tests/QuickForm2/Element/HierselectTest.php" />
+   <install as="QuickForm2/Element/InputButtonTest.php" name="tests/QuickForm2/Element/InputButtonTest.php" />
+   <install as="QuickForm2/Element/InputCheckableTest.php" name="tests/QuickForm2/Element/InputCheckableTest.php" />
+   <install as="QuickForm2/Element/InputCheckboxTest.php" name="tests/QuickForm2/Element/InputCheckboxTest.php" />
+   <install as="QuickForm2/Element/InputFileTest.php" name="tests/QuickForm2/Element/InputFileTest.php" />
+   <install as="QuickForm2/Element/InputHiddenTest.php" name="tests/QuickForm2/Element/InputHiddenTest.php" />
+   <install as="QuickForm2/Element/InputImageTest.php" name="tests/QuickForm2/Element/InputImageTest.php" />
+   <install as="QuickForm2/Element/InputPasswordTest.php" name="tests/QuickForm2/Element/InputPasswordTest.php" />
+   <install as="QuickForm2/Element/InputResetTest.php" name="tests/QuickForm2/Element/InputResetTest.php" />
+   <install as="QuickForm2/Element/InputSubmitTest.php" name="tests/QuickForm2/Element/InputSubmitTest.php" />
+   <install as="QuickForm2/Element/InputTest.php" name="tests/QuickForm2/Element/InputTest.php" />
+   <install as="QuickForm2/Element/SelectTest.php" name="tests/QuickForm2/Element/SelectTest.php" />
+   <install as="QuickForm2/Element/StaticTest.php" name="tests/QuickForm2/Element/StaticTest.php" />
+   <install as="QuickForm2/Element/TextareaTest.php" name="tests/QuickForm2/Element/TextareaTest.php" />
+   <install as="QuickForm2/Renderer/AllTests.php" name="tests/QuickForm2/Renderer/AllTests.php" />
+   <install as="QuickForm2/Renderer/ArrayTest.php" name="tests/QuickForm2/Renderer/ArrayTest.php" />
+   <install as="QuickForm2/Renderer/CallbackTest.php" name="tests/QuickForm2/Renderer/CallbackTest.php" />
+   <install as="QuickForm2/Renderer/DefaultTest.php" name="tests/QuickForm2/Renderer/DefaultTest.php" />
+   <install as="QuickForm2/Renderer/StubTest.php" name="tests/QuickForm2/Renderer/StubTest.php" />
+   <install as="QuickForm2/Rule/AllTests.php" name="tests/QuickForm2/Rule/AllTests.php" />
+   <install as="QuickForm2/Rule/CallbackTest.php" name="tests/QuickForm2/Rule/CallbackTest.php" />
+   <install as="QuickForm2/Rule/CompareTest.php" name="tests/QuickForm2/Rule/CompareTest.php" />
+   <install as="QuickForm2/Rule/EachTest.php" name="tests/QuickForm2/Rule/EachTest.php" />
+   <install as="QuickForm2/Rule/EmailTest.php" name="tests/QuickForm2/Rule/EmailTest.php" />
+   <install as="QuickForm2/Rule/EmptyTest.php" name="tests/QuickForm2/Rule/EmptyTest.php" />
+   <install as="QuickForm2/Rule/LengthTest.php" name="tests/QuickForm2/Rule/LengthTest.php" />
+   <install as="QuickForm2/Rule/MaxFileSizeTest.php" name="tests/QuickForm2/Rule/MaxFileSizeTest.php" />
+   <install as="QuickForm2/Rule/MimeTypeTest.php" name="tests/QuickForm2/Rule/MimeTypeTest.php" />
+   <install as="QuickForm2/Rule/NonemptyTest.php" name="tests/QuickForm2/Rule/NonemptyTest.php" />
+   <install as="QuickForm2/Rule/NotCallbackTest.php" name="tests/QuickForm2/Rule/NotCallbackTest.php" />
+   <install as="QuickForm2/Rule/NotRegexTest.php" name="tests/QuickForm2/Rule/NotRegexTest.php" />
+   <install as="QuickForm2/Rule/RegexTest.php" name="tests/QuickForm2/Rule/RegexTest.php" />
+   <install as="QuickForm2/Rule/RequiredTest.php" name="tests/QuickForm2/Rule/RequiredTest.php" />
+   <install as="QuickForm2/_files/1024-bytes.upload" name="tests/QuickForm2/_files/1024-bytes.upload" />
+   <install as="QuickForm2/_files/FakeElement.php" name="tests/QuickForm2/_files/FakeElement.php" />
+   <install as="QuickForm2/_files/FakeRule.php" name="tests/QuickForm2/_files/FakeRule.php" />
+   <install as="QuickForm2/_files/InvalidFile.php" name="tests/QuickForm2/_files/InvalidFile.php" />
+  </filelist>
+ </phprelease>
+ <changelog>
+  <release>
+   <date>2012-05-22</date>
+   <version>
+    <release>2.0.0RC1</release>
+    <api>2.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Bug fixes
+  * Server-side validation errors for elements inside Repeats are properly
+    displayed
+  * Javascript for Repeat elements moved to a more proper qf.elements.Repeat
+    namespace, old qf.Repeat is kept as an alias but is deprecated
+  * Fixed markup in usage examples (related to bug #19097)
+  * Callback renderer now generates the same markup as Default renderer out of
+    the box, this addresses bug #19097 and allows correct behaviour of
+    client-side validation and Repeat elements
+
+Changes
+  * HTML_QuickForm2::getValue() no longer returns values for internal form
+    fields (request #19403)
+  * It is no longer possible to set validation errors on hidden elements or
+    create Rules that set such errors, doing this will result in an Exception
+  * add() method of qf.elements.Repeat can accept an explicit index for a new
+    item, returns the index for added item
+  * Array Renderer: changes to buildCommonFields() make it easier to use by
+    Renderer plugins, arrays built for groups contain &apos;class&apos; attribute
+
+Backwards compatibility issues
+  * Items marked deprecated will be removed in release 2.0.0
+   </notes>
+  </release>
+  <release>
+   <date>2012-04-18</date>
+   <version>
+    <release>2.0.0beta2</release>
+    <api>2.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Feature additions
+  * Repeat element: given &apos;prototype&apos; Container (either fieldset or group)
+    is repeated multiple times, with possibility to add / remove repeated items
+    via Javascript. Full support for validation of repeated items.
+  * JavascriptBuilder now has separate getSetupCode() and getValidator()
+    methods in addition to combined getFormJavascript()
+
+Bug fixes
+  * Generated &apos;id&apos; attributes no longer can start with numbers
+  * Group::setValue() works properly for a group containing checkboxes named &apos;foo[]&apos;
+  * &apos;checked&apos; attribute for a checkbox is removed if form has data sources and
+    none of them contains a value for that checkbox
+  * Explicitly given value=&quot;0&quot; for a checkbox is not replaced by value=&quot;1&quot;
+  * setValue(null) no longer causes value=&quot;value&quot; in some &lt;input&gt; elements
+  * Hierselect&apos;s value is properly updated when its name changes
+  * Unit tests use autoloader instead of explicit &apos;require_once&apos;, all tests now
+    can be run separately
+  * HTML_QuickForm2_Renderer::register() allows overriding an existing renderer
+    type, similar to elements and rules
+  * Frozen HTML for checkboxes and radios no longer uses &lt;tt&gt; tags
+  * Fixed markup in controller/wizard.php and renderers/array-twig.php examples
+   </notes>
+  </release>
+  <release>
+   <date>2012-03-20</date>
+   <version>
+    <release>2.0.0beta1</release>
+    <api>2.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Feature additions
+  * Added &apos;email&apos; Rule (request #16906)
+  * Added Stub Renderer which does minimal form processing. Useful for forms
+    containing Javascript that are output manually.
+  * It is easier to customize client-side validation: all methods of
+    qf.Validator are public, CSS class names for validation status are kept in
+    validator&apos;s property.
+  * Test suite now properly runs from SVN checkout and under PHPUnit 3.6
+  * PHPDoc cleanup, added @method annotations to Container
+
+Bug fixes
+  * Fixed running tests for elements separately (bug #19039)
+  * Fixed errors removal in client-side validation (bug #19063)
+  * IDs for autogenerated elements no longer start with underscores, default
+    form output no longer contains empty &lt;label&gt; tags (bug #19097)
+  * HTML_QuickForm2_Controller_Action_Jump defaults to using
+    $_SERVER[&apos;HTTP_HOST&apos;] for host name (bug #19216)
+  * Group::setValue() now properly allows fluent calls (bug #19307)
+  * Container::validate() will now return false if any contained element
+    has an error message set
+  * Added abstract render() method to Node and abstract reset() to Renderer
+  * DefaultAction element no longer contains invalid &apos;width&apos; and &apos;height&apos;
+    attributes, &apos;src&apos; attribute defaults to &apos;data:&apos; URL
+  * &apos;Live&apos; client-side rules run only once on changing the form field,
+    prevent errors when form HTML contains links
+
+Backwards compatibility issues
+  * Items marked deprecated in version 0.6.0 are now removed
+   </notes>
+  </release>
+  <release>
+   <date>2011-09-29</date>
+   <version>
+    <release>0.6.1</release>
+    <api>0.6.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Bug fixes
+  * Callback renderer did not export setLabelCallback() method (bug #18833)
+  * Trying to use Static element under PHP 5.2 resulted in fatal error (bug #18874)
+  * persistentFreeze() is on by default for text and password elements
+
+Other features and changes
+  * Added an example showing how to output the form with Twig template engine
+  * Space characters are no longer allowed in &apos;id&apos; attribute values (request #18683)
+  * Added array type hinting to $data parameter in all elements&apos; constructors
+  * Fixed copypasted PHPDoc in several places
+   </notes>
+  </release>
+  <release>
+   <date>2011-06-13</date>
+   <version>
+    <release>0.6.0</release>
+    <api>0.6.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Milestone 6: &quot;live&quot; validation, localization changes, moving to beta
+
+Major additions and changes
+  * It is now possible to run client-side validation rules on changing the
+    fields value / leaving the field (onchange / onblur) as well as on form
+    submit (see request #5308)
+  * Client-side validation errors are now displayed near the elements by
+    default instead of in javascript alert() dialog. This is mostly similar
+    to behaviour of old HTML_QuickForm_DHTMLRulesTableless package.
+  * Localization messages (month and weekday names for Date, upload errors for
+    InputFile) are now returned by special &quot;message provider&quot; object
+    or callback (request #18341). A message provider for Date element using
+    current locale data is available (request #5558)
+  * Added a new optional renderer that uses PHP callbacks to render form elements
+
+Other features and changes
+  * Static elements can now wrap their content in a given tag having element&apos;s
+    attributes, e.g. &lt;div&gt; or &lt;img&gt; (see request #8626)
+  * It is now possible to set maximum and minimum hour in Date element&apos;s hours
+    select (request #4061, works for 24-hour format) and maximum and minimum
+    month in its months select (request #5957)
+  * File upload elements can no longer be added to method=&quot;get&quot; forms,
+    form&apos;s enctype attribute is automatically set (request #16807)
+  * Added a separate HTML_QuickForm2::isSubmitted() method, can be used to
+    check whether the form was sumbitted instead of checking an array of its
+    data sources for submit one
+  * Added HTML_QuickForm2_Renderer::methodExists() method, this can be used
+    to check whether a custom renderer has a necessary method / plugin and
+    fall back to the Default renderer if it doesn&apos;t
+  * Added default &apos;value&apos; attribute for radiobuttons
+  * Array renderer always returns group separator as an array of length
+    count($group) - 1, making it easier to use in templates
+  * Added CLIENT_SERVER and ONBLUR_CLIENT_SERVER constants to
+    HTML_QuickForm2_Rule, these make calls to addRule() less verbose
+  * Minified versions of javascript libraries are now provided
+
+Bug fixes
+  * Unit tests can now run under PHPUnit 3.5
+  * Required rule will throw an Exception if not given an error message (bug #18133)
+  * Default maxYear in Date element is now current year rather than 2010 (bug #18171)
+  * Group::removeChild() failed if group&apos;s name contained brackets (bug #18182)
+  * Values for elements named like &apos;foo[]&apos; are now properly handled by getValue()
+
+Backwards compatibility issues
+  * Javascript libraries are now installed into js/ and js/min/ subdirectories
+    of base data directory
+  * &apos;errorMessages&apos; parameter for HTML_QuickForm2_Element_InputFile is
+    deprecated and will be removed in the next release. Use message providers
+   </notes>
+  </release>
+  <release>
+   <date>2010-12-09</date>
+   <version>
+    <release>0.5.0</release>
+    <api>0.5.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Milestone 5: Javascript support, client-side validation, filters
+
+Major additions and changes
+  * It is now possible to run validation rules client-side as well as
+    server-side. This is controlled by passing a parameter to addRule()
+  * Implemented client-side validation for most builtin rules (MaxFileSize and
+    MimeType rules for file uploads cannot work client-side)
+  * Added JavascriptBuilder class, an instance of that is stored in Renderer and
+    aggregates client-side rules, references to Javascript library files and
+    Javascript for elements&apos; initialization. Inline Javascript can be easily
+    added with a special Script element
+  * Implemented base Javascript library to support client-side validation.
+    It should hopefully allow easier customization than inline Javascript in
+    HTML_QuickForm 3.x
+  * Implemented addFilter() and addRecursiveFilter() methods which can be used
+    to (recursively) apply filter callbacks to element values when calling
+    getValue(). A new getRawValue() method allows getting unfiltered values.
+
+Other features and changes
+  * Ported Date element from HTML_QuickForm 3.x
+  * Ported Hierselect element from HTML_QuickForm 3.x, it can now use callbacks
+    to load additional options via AJAX (see enclosed hierselect-ajax.php example)
+  * Ported Static element from HTML_QuickForm 3.x
+  * Added HTML_QuickForm2_Node::getData() method
+  * Added NotCallback and NotRegex rules, they consider element valid if callback
+    returns false for its value / if the value does not match regex, respectively
+  * It is now possible for autogenerated &apos;id&apos; attributes to not have mandatory
+    indexes appended. Use HTML_Common2::setOption(&apos;id_force_append_index&apos;, false);
+  * Container rules are called after rules on contained elements (request #17576)
+
+Bug fixes
+  * Added a div around form elements to prevent generating invalid HTML (bug #17217)
+  * Fixed counterintuitive behaviour of DataSource_Array (reported by Cedrick Gout
+    in pear-general mailing list)
+
+Backwards compatibility issues
+  * Methods marked as deprecated in release 0.4.0 are now removed
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.4.0</release>
+    <api>0.4.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <date>2010-03-08</date>
+   <notes>
+Milestone 4: port of HTML_QuickForm_Controller, group rules
+
+Major additions and changes
+  * Includes a port of HTML_QuickForm_Controller. It is now possible to create
+    multipage forms (wizards, tabbed forms, etc.) with HTML_QuickForm2
+  * It is now possible to leverage existing rules for group validation
+    (see also request #12610)
+  * Rule configuration redone, now an error for an incomplete or bogus
+    configuration will be thrown immediately on adding a Rule rather than on
+    validating with it. Rule::getConfig() will now return the complete
+    configuration rather than a local part of it.
+
+Features added
+  * It is possible to disable &quot;intrinsic validation&quot; for select
+    elements (request #13088)
+  * Checkboxes named &apos;foo[]&apos; properly get their values from data sources
+    (request #16806)
+  * Arrays generated by Array Renderer for fieldsets and groups contain
+    &apos;type&apos; keys (request #16937)
+  * Added setElementTemplateForGroupClass() and setElementTemplateForGroupId()
+    methods HTML_QuickForm2_Renderer_Default setting templates for grouped
+    elements within a group of a given class or with a given id, respectively
+
+Bug fixes
+  * E_NOTICE for an undefined index could be emitted when outputting
+    a checkbox (bug #16816)
+
+Backwards compatibility issues
+  * HTML_QuickForm2_Renderer_Default::setGroupedTemplateForClass() is
+    deprecated
+  * If you implemented custom Rules, you should rewrite them to conform
+    to the new Rule configuration approach (this may require implementing
+    custom mergeConfig() and setConfig() methods) and implement
+    validateOwner() method instead of checkValue(). Old-style Rules will emit
+    notices in 0.4.0 and will stop working completely in the next release.
+  * Packaging changes: data/, docs/ and tests/ contents are installed without
+    redundant subdirectories, e.g. quickform.css now resides in
+    @data_dir@/HTML_QuickForm2 rather than
+    @data_dir@/HTML_QuickForm2/data
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.0</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-10-25</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Milestone 3: renderers and groups
+
+Major additions and changes
+  * Renderers implemented, Default and Array renderers ported from QuickForm 3.x
+  * Groups implemented
+
+Feature requests addressed:
+  * Default rendering without tables (request #9116)
+  * setSeparator() method (request #9942)
+
+Bug fixes:
+  * Updated PHP dependency to 5.2.0 (bug #14110, PHP bug #37632)
+  * &apos;checked&apos; attributed on checkboxes and radios was not updated after changing
+    &apos;value&apos; attribute (bug #15708)
+
+Deprecated features:
+  * setOptions() and getOptions() methods of HTML_QuickForm2_Rule are
+    deprecated and will be removed in the next release. Use setConfig() and
+    getConfig() instead.
+
+WARNING: next release will have backwards compatibility breaks in setting Rule
+configuration data. If you are just using built-in Rules you should not be
+affected, but if you wrote custom subclasses for HTML_QuickForm2_Rule then pay
+special attention to changes in SVN.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.0</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2007-10-22</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Milestone 2: now with server-side validation support
+
+Major additions and changes:
+ * Server-side validation support added
+ * API break: changed number and order of parameters for element constructors
+ * Fluent interfaces: methods that previously returned nothing now return $this
+ * Added method overloading to Container, allowing $form-&gt;addTextarea(...)
+
+Feature requests addressed:
+ * Possibility to control validation of an element based on value of some
+   other element (request #4534)
+ * Rule comparing value of an element with numeric constants (request #4728)
+ * Possibility to toggle validation of empty elements (request #9097)
+
+Bug fixes (bugs submitted for HTML_QuickForm package):
+ * Wrong options could be selected in &lt;select&gt; elements if numeric strings
+   were used as options&apos; values (bug #10837, bug #11138)
+
+Other resources to consider:
+ * QF2 development wiki: http://quickform.mamasam.com/wiki/home
+ * PHPUnit package from channel pear.phpunit.de is needed to run tests
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2007-04-17</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Milestone 1
+
+Available functionality in this release:
+ * Base classes
+ * Standard HTML elements
+ * Data sources
+
+Changes to observe for those familiar with HTML_QuickForm:
+ * DOM-inspired API for working with element hierarchy
+ * Streamlined API for processing the elements&apos; values
+
+The following feature requests were addressed in this release:
+ * Request #1283: Optgroup support
+ * Request #1681: Better access to grouped elements
+ * Request #4137: Form-wide functions for unfreezing and setting persistent freeze
+   (also in request #6421)
+ * Request #4564: Checkboxes can be created with arbitrary value
+ * Request #4793: Fixed the misspelled &apos;persistent&apos; word in method names
+
+Other resources to consider:
+ * QF2 development wiki: http://quickform.mamasam.com/wiki/home
+ * PHPUnit package from channel pear.phpunit.de is needed to run tests
+   </notes>
+  </release>
+ </changelog>
+</package>
