@@ -18,9 +18,16 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 $ds = DIRECTORY_SEPARATOR;
-define('CAKE_CORE_INCLUDE_PATH', $ds . 'home' . $ds . 'kris' . $ds . 'sites' . $ds . 'cakephp-2.2.0' . $ds . 'lib' . $ds);
-$dispatcher = CAKE_CORE_INCLUDE_PATH . 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
-
+//We're only going to run multi-site in dev due to issues with ShellDispatcher.php in
+//core needing to be modified.
+$development = $_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '192.168.1.36' ? true : false;
+if($development){
+	define('CAKE_CORE_INCLUDE_PATH', $ds . 'home' . $ds . 'kris' . $ds . 'sites' . $ds . 'cakephp-2.2.0' . $ds . 'lib' . $ds);
+	$dispatcher = CAKE_CORE_INCLUDE_PATH . 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
+}
+else{
+	$dispatcher = 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
+}
 if (function_exists('ini_set')) {
 	$root = dirname(dirname(dirname(__FILE__)));
 	ini_set('include_path', $root . $ds . 'lib' . PATH_SEPARATOR . ini_get('include_path'));

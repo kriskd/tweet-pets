@@ -57,14 +57,11 @@ if (!defined('APP_DIR')) {
  * Leaving this constant undefined will result in it being defined in Cake/bootstrap.php
  */
 	//define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
-	if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-		if($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '192.168.1.36'){
-			define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'kris' . DS . 'sites' . DS . 'cakephp-2.2.0' . DS . 'lib');
-			//ini_set('include_path', DS . 'home' . DS . 'kris' . DS . 'sites' . DS . 'cakephp-2.2.0' . DS . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
-		}
-		else{
-			define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'mycakephp' . DS . 'cakephp');
-		}
+	//We're only going to run multi-site in dev due to issues with ShellDispatcher.php in
+	//core needing to be modified.
+	$development = $_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '192.168.1.36' ? true : false;
+	if (!defined('CAKE_CORE_INCLUDE_PATH') && $development) {
+		define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'kris' . DS . 'sites' . DS . 'cakephp-2.2.0' . DS . 'lib');
 	}
 
 /**
@@ -79,7 +76,7 @@ if (!defined('WWW_ROOT')) {
 	define('WWW_ROOT', dirname(__FILE__) . DS);
 }
 
-if (!defined('CAKE_CORE_INCLUDE_PATH')) { die('here');
+if (!defined('CAKE_CORE_INCLUDE_PATH')) { 
 	if (function_exists('ini_set')) {
 		ini_set('include_path', ROOT . DS . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
 	}
