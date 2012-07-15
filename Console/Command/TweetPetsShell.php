@@ -167,7 +167,7 @@ class TweetPetsShell extends AppShell
 
             App::uses('PhpReader', 'Configure');
             Configure::config('default', new PhpReader());
-            Configure::load('twitter-test', 'default');
+            Configure::load('twitter', 'default');
                       
             $request = array(
                 'method' => 'POST',
