@@ -27,7 +27,7 @@ done
 
 LIB=$(dirname -- "$LIB")/
 APP=$(dirname $(cd $(dirname $0) && pwd))
-
-exec php -q "$LIB"cake.php -working "$APP" "$@"
+#Path to PHP53 on Dreamhost
+exec /usr/local/php53/bin/php -q "$LIB"cake.php -working "$APP" "$@"
 
 exit;
