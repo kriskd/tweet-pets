@@ -31,7 +31,7 @@ class TweetPetsShell extends AppShell
         for($i=0; $i<count($dchs_pets['ID']); $i++){  
             $pets[] = $this->make_pet($dchs_pets, $i);
         }
-        $this->out(var_dump($pets));
+        //$this->out(var_dump($pets));
         if($pets){
             $pets_model['Pet'] = $pets;
             //var_dump($pets_model['Pet']);
@@ -42,10 +42,11 @@ class TweetPetsShell extends AppShell
     public function update_pets()
     {
         $database_pet_ids = $this->Pet->get_pet_ids(); 
-        $dchs_pets = $this->get_dchs_grouped_data(); 
-        if($dchs_pets){
-            $dchs_pet_ids = $dchs_pets['ID'];
-            
+        $dchs_pets = $this->get_dchs_grouped_data();
+        
+        $dchs_pet_ids = $dchs_pets['ID'];
+        $this->out(var_dump(count($database_pet_ids)));
+        if(count($dchs_pet_ids>0)){ 
             //Delete pets
             foreach($database_pet_ids as $id){ 
                 if(!in_array($id, $dchs_pet_ids)){ 
@@ -108,6 +109,7 @@ class TweetPetsShell extends AppShell
                 $this->_send_email('Inserts', $pets_to_add);
             }
         }
+        
     }
     
     public function make_pet($data, $array_id = null){
@@ -197,7 +199,8 @@ class TweetPetsShell extends AppShell
     public function set_tweeted_at()
     {
         $request = 'https://api.twitter.com/1/users/show.json?screen_name=dchspets&include_entities=false';
-        $results = $this->twitter->get_tweets_array($request);
+        $json = $this->HttpSocket->get($request);
+        $results = json_decode($json, true);
         $statuses_count = $results['statuses_count'];
         $loop_count = (int)ceil($statuses_count/200); 
         
@@ -209,7 +212,8 @@ class TweetPetsShell extends AppShell
             if($max_id){
                 $request .= '&max_id=' . $max_id;
             }
-            $results = $this->twitter->get_tweets_array($request);
+            $json = $this->HttpSocket->get($request);
+            $results = json_decode($json, true);
             //$this->format_array_dump($results);
             $tweets = array_merge($tweets, $results);
             $last = array_pop($results);
