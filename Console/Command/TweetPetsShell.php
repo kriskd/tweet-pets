@@ -31,7 +31,7 @@ class TweetPetsShell extends AppShell
         for($i=0; $i<count($dchs_pets['ID']); $i++){  
             $pets[] = $this->make_pet($dchs_pets, $i);
         }
-        //var_dump($pets);
+        $this->out(var_dump($pets));
         if($pets){
             $pets_model['Pet'] = $pets;
             //var_dump($pets_model['Pet']);
