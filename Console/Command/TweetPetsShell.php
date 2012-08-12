@@ -25,13 +25,19 @@ class TweetPetsShell extends AppShell
     
     public function insert_all_pets(){
 
-        $dchs_pets = $this->get_dchs_grouped_data(); 
+        $dchs_pets = $this->get_dchs_grouped_data();
+
+        $column_name_map = array('ID' => 'pet_id', 'Name' => 'name', 'Species' => 'species',
+                                 'PrimaryBreed' => 'primary_breed', 'SecondaryBreed' => 'secondary_breed',
+                                 'Gender' => 'gender', 'Age' => 'age', 'Site' => 'site');
         $pets = array();
-        $pets_model = array();
-        for($i=0; $i<count($dchs_pets['ID']); $i++){  
-            $pets[] = $this->make_pet($dchs_pets, $i);
+        foreach($dchs_pets as $item => $items){
+            foreach($items as $key => $value){
+                $pets[$key][$column_name_map[$item]] = trim($value);
+            }
         }
-        //$this->out(var_dump($pets));
+        //$this->out(var_dump($pets)); exit;
+
         if($pets){
             $pets_model['Pet'] = $pets;
             //var_dump($pets_model['Pet']);
@@ -45,7 +51,7 @@ class TweetPetsShell extends AppShell
         $dchs_pets = $this->get_dchs_grouped_data();
         
         $dchs_pet_ids = $dchs_pets['ID'];
-        $this->out(var_dump(count($database_pet_ids)));
+        //$this->out(var_dump(count($database_pet_ids)));
         if(count($dchs_pet_ids>0)){ 
             //Delete pets
             foreach($database_pet_ids as $id){ 
