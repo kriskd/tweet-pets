@@ -25,22 +25,10 @@ class TweetPetsShell extends AppShell
     
     public function insert_all_pets(){
 
-        $dchs_pets = $this->get_dchs_grouped_data();
+        $dchs_pets = $this->get_dchs_pets();
 
-        $column_name_map = array('ID' => 'pet_id', 'Name' => 'name', 'Species' => 'species',
-                                 'PrimaryBreed' => 'primary_breed', 'SecondaryBreed' => 'secondary_breed',
-                                 'Gender' => 'gender', 'Age' => 'age', 'Site' => 'site');
-        $pets = array();
-        foreach($dchs_pets as $item => $items){
-            foreach($items as $key => $value){
-                $pets[$key][$column_name_map[$item]] = trim($value);
-            }
-        }
-        //$this->out(var_dump($pets)); exit;
-
-        if($pets){
-            $pets_model['Pet'] = $pets;
-            //var_dump($pets_model['Pet']);
+        if($dchs_pets){
+            $pets_model['Pet'] = $dchs_pets;
             $this->Pet->saveAll($pets_model['Pet']);
         }
     }
@@ -48,64 +36,77 @@ class TweetPetsShell extends AppShell
     public function update_pets()
     {
         $database_pet_ids = $this->Pet->get_pet_ids(); 
-        $dchs_pets = $this->get_dchs_grouped_data();
+        $dchs_pets = $this->get_dchs_pets();
+        //$this->out(var_dump($dchs_pets)); exit;
         
-        $dchs_pet_ids = $dchs_pets['ID'];
-        //$this->out(var_dump(count($database_pet_ids)));
-        if(count($dchs_pet_ids>0)){ 
-            //Delete pets
-            foreach($database_pet_ids as $id){ 
-                if(!in_array($id, $dchs_pet_ids)){ 
+        $dchs_pet_ids = array();
+        $dchs_pet_ids = array_map(function($pet){
+                        return $pet['pet_id'];
+                }, $dchs_pets);
+        
+        if($dchs_pets){
+            //Insert new pets
+            $pets_to_add = array();
+            foreach($dchs_pets as $dchs_pet){
+                $pet_id = $dchs_pet['pet_id'];
+                if(!in_array($pet_id, $database_pet_ids)){
+                   $pets_to_add[] = $dchs_pet;
+                }
+            }
+
+
+            foreach($database_pet_ids as $id){
+                //Delete
+                if(!in_array($id, $dchs_pet_ids)){
                     $this->Pet->delete_pet($id);
                 }
-            }
-            
-            //Compare existing pets
-            //and find new pets
-            $pets_to_add = array();
-            $pets_to_update = array();
-            foreach($dchs_pet_ids as $key => $id){
-                $dchs_pet = $this->make_pet($dchs_pets, $key);
-                $db_pet = $this->Pet->get_pet($dchs_pet['pet_id']);
-                //If the dchs pet is already in our db, add id and tweeted_at
-                //in order to sort pets_to_update.
-                if($db_pet){ 
-                    if(count(array_diff_assoc($dchs_pet, $db_pet))>0){
-                        $dchs_pet['id'] = $db_pet['id'];
-                        $dchs_pet['tweeted_at'] = $db_pet['tweeted_at'];
-                        $pets_to_update[] = $dchs_pet;
+                
+                //Update
+                foreach($dchs_pets as $dchs_pet){
+                    if($dchs_pet['pet_id'] == $id){ 
+                        $db_pet = $this->Pet->get_pet($id);
+                        //If the dchs pet is already in our db, add id and tweeted_at
+                        //in order to sort pets_to_update.
+                        if(count(array_diff_assoc($dchs_pet, $db_pet))>0){
+                            $dchs_pet['id'] = $db_pet['id']; 
+                            $dchs_pet['tweeted_at'] = $db_pet['tweeted_at'];
+                            $pets_to_update[] = $dchs_pet;
+                        }
                     }
                 }
-                //Make array of new pets
-                if(!in_array($id, $database_pet_ids)){
-                    $pets_to_add[] = $dchs_pet;
-                }
             }
+            //$this->out(var_dump($pets_to_update)); exit;
+            
             //Sort first by tweeted_at and then by id.
             //We want to update non-tweeted pets first.
-            usort($pets_to_update, function($arr1, $arr2){
-                if($arr1['tweeted_at'] < $arr2['tweeted_at']){
-                    return -1;
+            if(isset($pets_to_update)){
+                usort($pets_to_update, function($arr1, $arr2){
+                    if($arr1['tweeted_at'] < $arr2['tweeted_at']){
+                        return -1;
+                    }
+                    elseif($arr1['tweeted_at'] > $arr2['tweeted_at']){
+                        return 1;
+                    }
+                    else{
+                        return $arr1['id'] < $arr2['id'] ? -1 : 1;
+                    }
+                }); 
+                            
+                //Only update 5 pets in case of bad data.
+                $updated_pets = null;
+                if(count($pets_to_update) > 0){ 
+                    for($i=0; $i<count($pets_to_update); $i++){
+                        unset($pets_to_update[$i]['tweeted_at']);
+                        $pet['Pet'] = $pets_to_update[$i];
+                        $this->Pet->save($pet['Pet']);
+                        $updated_pets[] = $pets_to_update[$i];
+                        if($i>4) exit;
+                    }
                 }
-                elseif($arr1['tweeted_at'] > $arr2['tweeted_at']){
-                    return 1;
-                }
-                else{
-                    return $arr1['id'] < $arr2['id'] ? -1 : 1;
-                }
-            });
-            
-            //Only update 5 pets in case of bad data.
-            $updated_pets = null;
-            for($i=0; $i<5; $i++){
-                unset($pets_to_update[$i]['tweeted_at']);
-                $pet['Pet'] = $pets_to_update[$i];
-                $this->Pet->save($pet['Pet']);
-                $updated_pets[] = $pets_to_update[$i];
             }
 
             //Email updated pets
-            if($updated_pets){
+            if(isset($updated_pets)){
                 $this->_send_email('Updates', $updated_pets);
             }
             //Save and email new pets
@@ -118,16 +119,7 @@ class TweetPetsShell extends AppShell
         
     }
     
-    public function make_pet($data, $array_id = null){
-        if($array_id !== null){
-            return array('pet_id' => trim($data['ID'][$array_id]), 'name' => trim($data['Name'][$array_id]),
-                            'species' => trim($data['Species'][$array_id]), 'primary_breed' => trim($data['PrimaryBreed'][$array_id]),
-                            'secondary_breed' => trim($data['SecondaryBreed'][$array_id]), 'gender' => trim($data['Gender'][$array_id]),
-                            'age' => trim($data['Age'][$array_id]), 'site' => trim($data['Site'][$array_id]));
-        }
-    }
-    
-    public function get_dchs_grouped_data(){
+    public function get_dchs_pets(){
 
         App::import('Sanitize');
         $params = array('orderBy' => 'ID', 'primaryBreed' => 0, 'primaryBreed_none' => 0, 'primaryBreedcat' => 0,
@@ -136,7 +128,7 @@ class TweetPetsShell extends AppShell
                                     $params); 
 
         $sanitize = $this->_strip_tags_f($results); 
-        //var_dump($sanitize); exit;
+        
         //ID: 5424002Name: MaxeySpecies: DogPrimaryBreed: Retriever, LabradorSecondaryBreed: Sex: FemaleSN: SpayedSite: Foster ProgramStage: NoFind out more about Maxey
         
         if(!$sanitize) return null;
@@ -150,8 +142,19 @@ class TweetPetsShell extends AppShell
                 $data[$attributes[$i]] = $matches;
             }
             
-        } //var_dump($data); exit;
-        return $data;
+        }
+        //$this->out(var_dump($data)); exit;
+        $column_name_map = array('ID' => 'pet_id', 'Name' => 'name', 'Species' => 'species',
+                                 'PrimaryBreed' => 'primary_breed', 'SecondaryBreed' => 'secondary_breed',
+                                 'Gender' => 'gender', 'Age' => 'age', 'Site' => 'site');
+        $pets = array();
+        foreach($data as $item => $items){
+            foreach($items as $key => $value){
+                $pets[$key][$column_name_map[$item]] = trim($value);
+            }
+        }
+        
+        return $pets;
     }
     
     public function tweet_pet()
