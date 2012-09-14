@@ -109,11 +109,17 @@ class TweetPetsShell extends AppShell
             if(isset($updated_pets)){
                 $this->_send_email('Updates', $updated_pets);
             }
+            else{
+                CakeEmail::deliver('info@jimandkris.com', 'No Updated', 'No updated', array('from' => 'kriskd@gmail.com'));
+            }
             //Save and email new pets
             if($pets_to_add){
                 $pets_model['Pet'] = $pets_to_add;   
                 $this->Pet->saveAll($pets_model['Pet']);
                 $this->_send_email('Inserts', $pets_to_add);
+            }
+            else{
+                CakeEmail::deliver('info@jimandkris.com', 'No Adds', 'No adds', array('from' => 'kriskd@gmail.com'));
             }
         }
         
