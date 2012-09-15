@@ -11,6 +11,7 @@ class TweetPetsShell extends AppShell
         //$this->twitter = new Twitter();
         App::uses('HttpSocket', 'Network/Http');
         $this->HttpSocket = new HttpSocket();
+        App::uses('CakeEmail', 'Network/Email');
     }
     
     public function main()
@@ -256,7 +257,6 @@ class TweetPetsShell extends AppShell
     
     protected function _send_email($type, $pets)
     {
-        App::uses('CakeEmail', 'Network/Email');
         $email = new CakeEmail();
         $email->config('smtp');
         $email->template('pets', 'default')
