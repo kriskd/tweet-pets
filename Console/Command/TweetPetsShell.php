@@ -36,6 +36,8 @@ class TweetPetsShell extends AppShell
     
     public function update_pets()
     {
+        CakeEmail::deliver('info@jimandkris.com', 'Update', 'Updated started', array('from' => 'kriskd@gmail.com'));
+        
         $database_pet_ids = $this->Pet->get_pet_ids(); 
         $dchs_pets = $this->get_dchs_pets();
         //$this->out(var_dump($dchs_pets)); exit;
