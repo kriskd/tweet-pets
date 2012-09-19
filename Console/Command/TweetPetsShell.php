@@ -53,7 +53,6 @@ class TweetPetsShell extends AppShell
                    $pets_to_add[] = $dchs_pet;
                 }
             }
-            $this->out(var_dump($pets_to_add));
 
             foreach($database_pet_ids as $id){
                 //Delete
@@ -98,7 +97,6 @@ class TweetPetsShell extends AppShell
                     for($i=0; $i<count($pets_to_update); $i++){
                         unset($pets_to_update[$i]['tweeted_at']);
                         $pet['Pet'] = $pets_to_update[$i];
-                        $this->out(var_dump($pet['Pet']));
                         $this->Pet->save($pet['Pet']);
                         $updated_pets[] = $pets_to_update[$i];
                         if($i>4) exit;
@@ -113,7 +111,8 @@ class TweetPetsShell extends AppShell
 
             //Save and email new pets
             if($pets_to_add){
-                $pets_model['Pet'] = $pets_to_add;   
+                $pets_model['Pet'] = $pets_to_add;
+                $this->out(var_dump($pets_model['Pet']));
                 $this->Pet->saveAll($pets_model['Pet']);
                 $this->_send_email('Inserts', $pets_to_add);
             }
