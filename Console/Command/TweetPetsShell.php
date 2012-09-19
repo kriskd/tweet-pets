@@ -36,11 +36,8 @@ class TweetPetsShell extends AppShell
     
     public function update_pets()
     {
-        CakeEmail::deliver('info@jimandkris.com', 'Update', 'Updated started', array('from' => 'kriskd@gmail.com'));
-        
         $database_pet_ids = $this->Pet->get_pet_ids(); 
         $dchs_pets = $this->get_dchs_pets();
-        //$this->out(var_dump($dchs_pets)); exit;
         
         $dchs_pet_ids = array();
         $dchs_pet_ids = array_map(function($pet){
@@ -56,7 +53,7 @@ class TweetPetsShell extends AppShell
                    $pets_to_add[] = $dchs_pet;
                 }
             }
-
+            $this->out(var_dump($pets_to_add));
 
             foreach($database_pet_ids as $id){
                 //Delete
@@ -101,6 +98,7 @@ class TweetPetsShell extends AppShell
                     for($i=0; $i<count($pets_to_update); $i++){
                         unset($pets_to_update[$i]['tweeted_at']);
                         $pet['Pet'] = $pets_to_update[$i];
+                        $this->out(var_dump($pet['Pet']));
                         $this->Pet->save($pet['Pet']);
                         $updated_pets[] = $pets_to_update[$i];
                         if($i>4) exit;
@@ -112,17 +110,12 @@ class TweetPetsShell extends AppShell
             if(isset($updated_pets)){
                 $this->_send_email('Updates', $updated_pets);
             }
-            else{
-                CakeEmail::deliver('info@jimandkris.com', 'No Updated', 'No updated', array('from' => 'kriskd@gmail.com'));
-            }
+
             //Save and email new pets
             if($pets_to_add){
                 $pets_model['Pet'] = $pets_to_add;   
                 $this->Pet->saveAll($pets_model['Pet']);
                 $this->_send_email('Inserts', $pets_to_add);
-            }
-            else{
-                CakeEmail::deliver('info@jimandkris.com', 'No Adds', 'No adds', array('from' => 'kriskd@gmail.com'));
             }
         }
         
