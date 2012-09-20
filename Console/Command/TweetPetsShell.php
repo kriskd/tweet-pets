@@ -38,13 +38,15 @@ class TweetPetsShell extends AppShell
     {
         $database_pet_ids = $this->Pet->get_pet_ids(); 
         $dchs_pets = $this->get_dchs_pets();
-        
-        $dchs_pet_ids = array();
-        $dchs_pet_ids = array_map(function($pet){
-                        return $pet['pet_id'];
-                }, $dchs_pets);
         $this->out('Pet count: ' . count($dchs_pets));
-        if($dchs_pets){
+        
+        if(is_array($dchs_pets)){
+            
+            $dchs_pet_ids = array();
+            $dchs_pet_ids = array_map(function($pet){
+                            return $pet['pet_id'];
+                    }, $dchs_pets);
+        
             //Insert new pets
             $pets_to_add = array();
             foreach($dchs_pets as $dchs_pet){
@@ -103,12 +105,12 @@ class TweetPetsShell extends AppShell
                     }
                 }
             }
-
+            
             //Email updated pets
             if(isset($updated_pets)){
                 $this->_send_email('Updates', $updated_pets);
             }
-            $this->out(var_dump($pets_to_add));
+            $this->out(var_dump($pets_to_add)); 
             //Save and email new pets
             if($pets_to_add){
                 $this->out('Pets to add');
