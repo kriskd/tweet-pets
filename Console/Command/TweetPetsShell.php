@@ -43,7 +43,7 @@ class TweetPetsShell extends AppShell
         $dchs_pet_ids = array_map(function($pet){
                         return $pet['pet_id'];
                 }, $dchs_pets);
-        
+        $this->out('Pet count: ' . count($dchs_pets));
         if($dchs_pets){
             //Insert new pets
             $pets_to_add = array();
