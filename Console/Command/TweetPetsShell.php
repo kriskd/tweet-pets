@@ -38,7 +38,7 @@ class TweetPetsShell extends AppShell
     {
         $database_pet_ids = $this->Pet->get_pet_ids(); 
         $dchs_pets = $this->get_dchs_pets();
-        $this->out('Pet count: ' . count($dchs_pets), gettype($dchs_pets));
+        $this->out('Pet count: ' . count($dchs_pets) . ' ' . gettype($dchs_pets));
         
         if(is_array($dchs_pets)){
             
