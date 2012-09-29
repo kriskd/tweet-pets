@@ -76,7 +76,7 @@ class TweetPetsShell extends AppShell
                     }
                 }
             }
-            //$this->out(var_dump($pets_to_update)); exit;
+            $this->out('Pets to update count: ' . count($pets_to_update)); 
             
             //Sort first by tweeted_at and then by id.
             //We want to update non-tweeted pets first.
