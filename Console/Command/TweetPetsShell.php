@@ -11,6 +11,11 @@ class TweetPetsShell extends AppShell
         App::uses('HttpSocket', 'Network/Http');
         App::uses('CakeEmail', 'Network/Email');
         $this->HttpSocket = new HttpSocket();
+        
+        App::uses('PhpReader', 'Configure');
+        Configure::config('default', new PhpReader());
+        //Load config file for TweetPets
+        Configure::load('twitter', 'default');
     }
     
     /**
@@ -95,13 +100,13 @@ class TweetPetsShell extends AppShell
 
                 //Only update 5 pets in case of bad data.
                 $updated_pets = null;
-                if(count($pets_to_update) > 0){ 
+                if(count($pets_to_update) > 0){
                     for($i=0; $i<count($pets_to_update); $i++){
+                        if($i>4) break;
                         unset($pets_to_update[$i]['tweeted_at']);
                         $pet['Pet'] = $pets_to_update[$i];
                         $this->Pet->save($pet['Pet']);
                         $updated_pets[] = $pets_to_update[$i];
-                        if($i>4) break;
                     }
                 }
             }
@@ -273,8 +278,8 @@ class TweetPetsShell extends AppShell
         $email->config('smtp');
         $email->template('pets', 'default')
                 ->emailFormat('html')
-                ->from(array('info@jimandkris.com'))
-                ->to('info@jimandkris.com')
+                ->from(array(Configure::read('email')))
+                ->to(Configure::read('email'))
                 ->subject('Tweet Pets DB '. $type)
                 ->viewVars(compact('pets', 'type'))
                 ->send();
@@ -314,11 +319,6 @@ class TweetPetsShell extends AppShell
      */
     protected function _get_auth()
     {
-        App::uses('PhpReader', 'Configure');
-        Configure::config('default', new PhpReader());
-        //Load Oauth creds file
-        Configure::load('twitter', 'default');
-            
         return array(
                   'method' => 'OAuth',
                   'oauth_token' => Configure::read('oauth_token'),
