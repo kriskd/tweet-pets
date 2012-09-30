@@ -57,12 +57,6 @@ if (!defined('APP_DIR')) {
  * Leaving this constant undefined will result in it being defined in Cake/bootstrap.php
  */
 	//define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
-	//We're only going to run multi-site in dev due to issues with ShellDispatcher.php in
-	//core needing to be modified.
-	$development = $_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '192.168.1.36' ? true : false;
-	if (!defined('CAKE_CORE_INCLUDE_PATH') && $development) {
-		define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'kris' . DS . 'sites' . DS . 'cakephp-2.2.0' . DS . 'lib');
-	}
 
 /**
  * Editing below this line should NOT be necessary.
@@ -77,18 +71,18 @@ if (!defined('WWW_ROOT')) {
 }
 
 if (!defined('CAKE_CORE_INCLUDE_PATH')) { 
-	if (function_exists('ini_set')) {
-		ini_set('include_path', ROOT . DS . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
+	if (function_exists('ini_set')) { 
+		ini_set('include_path', ROOT . DS . 'cakephp-2.2.0' . DS .'lib' . PATH_SEPARATOR . ini_get('include_path'));
 	}
-	if (!include ('Cake' . DS . 'bootstrap.php')) {
+	if (!include ('Cake' . DS . 'bootstrap.php')) { 
 		$failed = true;
 	}
 } else {
 	if (!include (CAKE_CORE_INCLUDE_PATH . DS . 'Cake' . DS . 'bootstrap.php')) {
 		$failed = true;
 	}
-}
-if (!empty($failed)) { 
+} 
+if (!empty($failed)) {
 	trigger_error("CakePHP core could not be found.  Check the value of CAKE_CORE_INCLUDE_PATH in APP/webroot/index.php.  It should point to the directory containing your " . DS . "cake core directory and your " . DS . "vendors root directory.", E_USER_ERROR);
 }
 
