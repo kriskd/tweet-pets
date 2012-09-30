@@ -102,7 +102,7 @@ class TweetPetsShell extends AppShell
                         $this->Pet->save($pet['Pet']);
                         $updated_pets[] = $pets_to_update[$i];
                         $this->out('Number of pets updated: '. $i);
-                        if($i>4) exit;
+                        if($i>4) break;
                     }
                 }
             }
@@ -110,6 +110,7 @@ class TweetPetsShell extends AppShell
             //Email updated pets
             if(isset($updated_pets)){
                 $this->_send_email('Updates', $updated_pets);
+                $this->out('Updated pets');
             }
             $this->out(var_dump($pets_to_add)); 
             //Save and email new pets
