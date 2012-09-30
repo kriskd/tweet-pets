@@ -92,7 +92,7 @@ class TweetPetsShell extends AppShell
                         return $arr1['id'] < $arr2['id'] ? -1 : 1;
                     }
                 }); 
-                            
+                $this->out('Pets to update sorted count: ' . count($pets_to_update));
                 //Only update 5 pets in case of bad data.
                 $updated_pets = null;
                 if(count($pets_to_update) > 0){ 
@@ -101,6 +101,7 @@ class TweetPetsShell extends AppShell
                         $pet['Pet'] = $pets_to_update[$i];
                         $this->Pet->save($pet['Pet']);
                         $updated_pets[] = $pets_to_update[$i];
+                        $this->out('Number of pets updated: '. $i);
                         if($i>4) exit;
                     }
                 }
