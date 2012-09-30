@@ -22,19 +22,9 @@ if (!defined('ROOT')) {
 	define('ROOT', dirname(dirname(dirname(__FILE__))));
 }
 $dispatcher = ROOT . $ds . 'cakephp-2.2.0' . $ds . 'lib' . $ds . 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
-//We're only going to run multi-site in dev due to issues with ShellDispatcher.php in
-//core needing to be modified.
-/*$ip = isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : null;
-$development = (isset($ip) && $ip == '127.0.0.1') || (isset($ip) && $ip == '192.168.1.36') || (strcasecmp(gethostname(), 'Ubuntu-VB')==0) ? true : false;
-if($development){
-	//$dispatcher = '/home/kris/sites/cakephp-2.2.0/lib/' . 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
-	$dispatcher = ROOT . $ds . 'cakephp-2.2.0' . $ds . 'lib' . $ds . 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
-}
-else{
-	$dispatcher = 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
-}*/
+
 if (function_exists('ini_set')) {
-	$root = dirname(dirname(dirname(__FILE__))); echo $root . $ds . 'lib' . PATH_SEPARATOR;
+	$root = dirname(dirname(dirname(__FILE__))); 
 	ini_set('include_path', $root . $ds . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
 }
 
