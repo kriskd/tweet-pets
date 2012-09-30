@@ -5,27 +5,21 @@ class TweetPetsShell extends AppShell
     
     protected $HttpSocket;
     
-    public function __construct(){ 
+    public function __construct()
+    { 
         parent::__construct();
-        //App::import('Lib', 'Twitter');
-        //$this->twitter = new Twitter();
         App::uses('HttpSocket', 'Network/Http');
-        $this->HttpSocket = new HttpSocket();
         App::uses('CakeEmail', 'Network/Email');
+        $this->HttpSocket = new HttpSocket();
     }
     
-    public function main()
+    /**
+     * Initial load of all pets at giveshelter.org
+     * into local database
+     * @return void
+     */
+    public function insert_all_pets()
     {
-        $this->out(extension_loaded('openssl'));
-    }
-    
-    public function hey_there()
-    {
-        $this->out('Hey there ' . $this->args[0]);
-    }
-    
-    public function insert_all_pets(){
-
         $dchs_pets = $this->get_dchs_pets();
 
         if($dchs_pets){
@@ -34,19 +28,26 @@ class TweetPetsShell extends AppShell
         }
     }
     
+    /**
+     * Update local database. Script runs once every 24 hours.
+     * Insert new pets, delete pets no longer listed on giveshelter.org
+     * and update current pet information.
+     * Only update 5 pets in case giveshelter.org has changed layout which
+     * could update every pet with bad information.
+     * Email admin a list of new and update pets to verify data integrity.
+     * @return void
+     */
     public function update_pets()
     {
         $database_pet_ids = $this->Pet->get_pet_ids(); 
         $dchs_pets = $this->get_dchs_pets();
-        $this->out('Pet count: ' . count($dchs_pets) . ' ' . gettype($dchs_pets));
         
         if(is_array($dchs_pets)){
-            $this->out('We have dchs_pets');
             $dchs_pet_ids = array();
             $dchs_pet_ids = array_map(function($pet){
                             return $pet['pet_id'];
                     }, $dchs_pets);
-            $this->out('dchs pet_id count ' . (count($dchs_pet_ids)));
+
             //Insert new pets
             $pets_to_add = array();
             foreach($dchs_pets as $dchs_pet){
@@ -76,7 +77,6 @@ class TweetPetsShell extends AppShell
                     }
                 }
             }
-            $this->out('Pets to update count: ' . count($pets_to_update)); 
             
             //Sort first by tweeted_at and then by id.
             //We want to update non-tweeted pets first.
@@ -92,7 +92,7 @@ class TweetPetsShell extends AppShell
                         return $arr1['id'] < $arr2['id'] ? -1 : 1;
                     }
                 }); 
-                $this->out('Pets to update sorted count: ' . count($pets_to_update));
+
                 //Only update 5 pets in case of bad data.
                 $updated_pets = null;
                 if(count($pets_to_update) > 0){ 
@@ -101,7 +101,6 @@ class TweetPetsShell extends AppShell
                         $pet['Pet'] = $pets_to_update[$i];
                         $this->Pet->save($pet['Pet']);
                         $updated_pets[] = $pets_to_update[$i];
-                        $this->out('Number of pets updated: '. $i);
                         if($i>4) break;
                     }
                 }
@@ -110,12 +109,10 @@ class TweetPetsShell extends AppShell
             //Email updated pets
             if(isset($updated_pets)){
                 $this->_send_email('Updates', $updated_pets);
-                $this->out('Updated pets');
             }
-            $this->out(var_dump($pets_to_add)); 
+
             //Save and email new pets
             if($pets_to_add){
-                $this->out('Pets to add');
                 $pets_model['Pet'] = $pets_to_add;
                 $this->Pet->saveAll($pets_model['Pet']);
                 $this->_send_email('Inserts', $pets_to_add);
@@ -124,8 +121,13 @@ class TweetPetsShell extends AppShell
         
     }
     
-    public function get_dchs_pets(){
-
+    /**
+     * Scrape giveshelter.org for pet information.
+     * Get all the pets by submitting a $_POST to the site, clean up with regex.
+     * @return array 
+     */
+    public function get_dchs_pets()
+    {
         App::import('Sanitize');
         $params = array('orderBy' => 'ID', 'primaryBreed' => 0, 'primaryBreed_none' => 0, 'primaryBreedcat' => 0,
                         'sex' => 'A', 'ageGroup' => 'All', 'site' => '', 'speciesID' => 0, 'task' => 'apply');
@@ -134,6 +136,7 @@ class TweetPetsShell extends AppShell
 
         $sanitize = $this->_strip_tags_f($results); 
         
+        //Sample data
         //ID: 5424002Name: MaxeySpecies: DogPrimaryBreed: Retriever, LabradorSecondaryBreed: Sex: FemaleSN: SpayedSite: Foster ProgramStage: NoFind out more about Maxey
         
         if(!$sanitize) return null;
@@ -146,9 +149,8 @@ class TweetPetsShell extends AppShell
                 $matches = array_shift($matches);
                 $data[$attributes[$i]] = $matches;
             }
-            
         }
-        //$this->out(var_dump($data)); exit;
+
         $column_name_map = array('ID' => 'pet_id', 'Name' => 'name', 'Species' => 'species',
                                  'PrimaryBreed' => 'primary_breed', 'SecondaryBreed' => 'secondary_breed',
                                  'Gender' => 'gender', 'Age' => 'age', 'Site' => 'site');
@@ -162,6 +164,15 @@ class TweetPetsShell extends AppShell
         return $pets;
     }
     
+    /**
+     * Build text of pet tweet.
+     * Find pet with lowest ID that has not been tweeted, or if all tweeted,
+     * get earliest tweeted pet.
+     * Use Oauth library to post tweet to @dchspets.
+     * http://www.neilcrookes.com/2010/04/12/cakephp-oauth-extension-to-httpsocket/
+     * Updated for CakePHP 2 by changing App::import to App::uses
+     * return void
+     */
     public function tweet_pet()
     {
         if(!$pet = $this->Pet->find('first', array('conditions' => array('tweeted_at' => null),
@@ -180,10 +191,6 @@ class TweetPetsShell extends AppShell
 
             App::uses('HttpSocketOauth', 'Vendor');
             $Http = new HttpSocketOauth();
-
-            App::uses('PhpReader', 'Configure');
-            Configure::config('default', new PhpReader());
-            Configure::load('twitter', 'default');
                       
             $request = array(
                 'method' => 'POST',
@@ -199,7 +206,6 @@ class TweetPetsShell extends AppShell
             $response = $Http->request($request);
             
             if($response){
-                //$this->out($response);
                 $currentDateTime = (string)date('Y-m-d H:i:s');
                 $this->Pet->id = $pet['id'];
                 $this->Pet->save(array('tweeted_at' => $currentDateTime));
@@ -207,8 +213,10 @@ class TweetPetsShell extends AppShell
         }
     }
     
-    /*
-     * Run after update_all_pets to set tweeted_at
+    /**
+     * In case of data loss, populate tweeted_at after re-populated database
+     * with update_all_pets
+     * return void
      */
     public function set_tweeted_at()
     {
@@ -253,6 +261,12 @@ class TweetPetsShell extends AppShell
         }
     }
     
+    /**
+     * Send an email with pets updated and added
+     * @param $type string Update or Add
+     * @param $pets array pets that were updated or added
+     * @return void
+     */
     protected function _send_email($type, $pets)
     {
         $email = new CakeEmail();
@@ -266,7 +280,10 @@ class TweetPetsShell extends AppShell
                 ->send();
     }
     
-    //http://www.danmorgan.net/programming/php-programming/php-strip_tags-fixed-no-more-missing-data/
+    /**
+     * Improved strip_tags from
+     * http://www.danmorgan.net/programming/php-programming/php-strip_tags-fixed-no-more-missing-data/
+     */
     protected function _strip_tags_f($i_html, $i_allowedtags = array(), $i_trimtext = FALSE) {
         if (!is_array($i_allowedtags))
         $i_allowedtags = !empty($i_allowedtags) ? array($i_allowedtags) : array();
@@ -291,11 +308,17 @@ class TweetPetsShell extends AppShell
         return $i_trimtext ? implode('', $full_tags) : $i_html;
     }
     
-    /*
-     * Auth for dchspets
+    /**
+     * Values for auth key for OAuth request
+     * @return array
      */
     protected function _get_auth()
     {
+        App::uses('PhpReader', 'Configure');
+        Configure::config('default', new PhpReader());
+        //Load Oauth creds file
+        Configure::load('twitter', 'default');
+            
         return array(
                   'method' => 'OAuth',
                   'oauth_token' => Configure::read('oauth_token'),
