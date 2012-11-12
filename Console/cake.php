@@ -18,10 +18,9 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 $ds = DIRECTORY_SEPARATOR;
-if (!defined('ROOT')) {
-	define('ROOT', dirname(dirname(dirname(__FILE__))));
-}
-$dispatcher = ROOT . $ds . 'cakephp-2.2.0' . $ds . 'lib' . $ds . 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
+$root = dirname(dirname(dirname(__FILE__))); 
+
+$dispatcher = $root . $ds . 'cakephp-2.2.0' . $ds . 'lib' . $ds . 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
 
 if (function_exists('ini_set')) {
 	$root = dirname(dirname(dirname(__FILE__))); 
