@@ -255,7 +255,7 @@ class TweetPetsShell extends AppShell
                 $url = $tweet['entities']['urls'][0]['expanded_url']; 
                 $dchs_id = substr($url, stripos($url, 'id=')+3, strlen($url));
             }
-            if(!isset($tweet['created_at'])) var_dump($tweet);
+            
             $tweeted_at = date('Y-m-d H:i:s', strtotime($tweet['created_at']));
             
             if($dchs_id){
