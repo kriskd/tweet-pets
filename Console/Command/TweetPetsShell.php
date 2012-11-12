@@ -1,7 +1,7 @@
 <?php
 class TweetPetsShell extends AppShell
 {
-    public $uses = array('Pet');
+    public $uses = array('Pet', 'TwitterUser', 'TwitterUserTimeline');
     
     protected $HttpSocket;
     
@@ -220,42 +220,44 @@ class TweetPetsShell extends AppShell
     
     /**
      * In case of data loss, populate tweeted_at after re-populated database
-     * with update_all_pets
+     * with update_pets
      * return void
      */
     public function set_tweeted_at()
     {
-        $request = 'https://api.twitter.com/1/users/show.json?screen_name=dchspets&include_entities=false';
-        $json = $this->HttpSocket->get($request);
-        $results = json_decode($json, true);
-        $statuses_count = $results['statuses_count'];
+        $twitter_user = $this->TwitterUser->find('all', array('conditions' => array('screen_name' => 'dchspets',
+                                                                              'include_entities' => 'false')));
+        
+        $statuses_count = $twitter_user['TwitterUser']['statuses_count']; 
         $loop_count = (int)ceil($statuses_count/200); 
         
         $max_id = null;
         $tweets = array();
 
         for($i=0; $i<$loop_count; $i++){
-            $request = 'https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=false&screen_name=dchspets&trim_user=1&count=200';
+            $conditions =array('include_entities' => 'true',
+                               'include_rts' => 'false',
+                               'screen_name' => 'dchspets',
+                               'trim_user' => 1,
+                               'count' => 200);
             if($max_id){
-                $request .= '&max_id=' . $max_id;
-            }
-            $json = $this->HttpSocket->get($request);
-            $results = json_decode($json, true);
-            //$this->format_array_dump($results);
-            $tweets = array_merge($tweets, $results);
-            $last = array_pop($results);
+                $conditions['max_id'] = $max_id;
+            } 
+            $timeline = $this->TwitterUserTimeline->find('all', array('conditions' => $conditions));
+            $tweets = array_merge($tweets, $timeline['TwitterUserTimeline']); 
+            $last = array_pop($timeline['TwitterUserTimeline']); 
             $last_id = $last['id'];
             $max_id = $last_id-1;
         }
-
+        
         foreach($tweets as $tweet){
             if(isset($tweet['entities']['urls'][0])){
                 $url = $tweet['entities']['urls'][0]['expanded_url']; 
                 $dchs_id = substr($url, stripos($url, 'id=')+3, strlen($url));
             }
-            
+            if(!isset($tweet['created_at'])) var_dump($tweet);
             $tweeted_at = date('Y-m-d H:i:s', strtotime($tweet['created_at']));
-        
+            
             if($dchs_id){
                 $pet = $this->Pet->get_pet($dchs_id);
                 if($pet){
