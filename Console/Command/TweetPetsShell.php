@@ -201,7 +201,7 @@ class TweetPetsShell extends AppShell
                 'method' => 'POST',
                 'uri' => array(
                   'host' => 'api.twitter.com',
-                  'path' => '1/statuses/update.json',
+                  'path' => '1.1/statuses/update.json',
                 ),
                 'auth' => $this->_get_auth(),
                 'body' => array(
