@@ -200,12 +200,13 @@ class TweetPetsShell extends AppShell
             $request = array(
                 'method' => 'POST',
                 'uri' => array(
-                  'host' => 'api.twitter.com',
-                  'path' => '1.1/statuses/update.json',
+                    'scheme' => 'https',
+                    'host' => 'api.twitter.com',
+                    'path' => '1.1/statuses/update.json',
                 ),
                 'auth' => $this->_get_auth(),
                 'body' => array(
-                  'status' => $tweet,
+                    'status' => $tweet,
                 ),
             );
             $response = $Http->request($request);
