@@ -1,0 +1,3 @@
+[submodule "Config"]
+	path = Config
+	url = ssh://cakeconfig@sofia.dreamhost.com/home/cakeconfig/cakeconfig.dreamhosters.com/tweetpets-config.git
