@@ -193,7 +193,7 @@ class TweetPetsShell extends AppShell
             $tweet .= strtolower($pet['primary_breed']) . ' ';
             $tweet .= strcasecmp($pet['primary_breed'], $pet['secondary_breed'])==0 ? '' : strtolower($pet['secondary_breed']) . ' ';
             $tweet .= in_array(strtolower($pet['species']), $standard_species) ? strtolower($pet['species']) : '';
-            $tweet .= ' http://www.giveshelter.org/component/animaldetail/?id='. $pet['pet_id'];
+            $tweet .= ' https://www.giveshelter.org/index.php?option=com_animaldetail&view=animaldetails&id='. $pet['pet_id'];
 
             App::uses('HttpSocketOauth', 'Vendor');
             $Http = new HttpSocketOauth();
