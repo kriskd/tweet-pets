@@ -15,9 +15,24 @@ class TwitterUserTimelineSource extends DataSource
     }
     
     public function read(Model $model, $queryData = array(), $recursive = null)
-    {   
-        $json = $this->Http->get('https://api.twitter.com/1/statuses/user_timeline.json', $queryData['conditions']);
-        $results = json_decode($json, true);  
+    {
+        App::uses('HttpSocketOauth', 'Vendor');
+        $Http = new HttpSocketOauth();
+                  
+        $request = array(
+            'method' => 'GET',
+            'uri' => array(
+                'scheme' => 'https',
+                'host' => 'api.twitter.com',
+                'path' => '1.1/statuses/user_timeline.json',
+                'query' => $queryData['conditions']
+            ),
+            'auth' => $this->_get_auth(),
+        );
+        
+        $response = $Http->request($request);
+        $results = json_decode($response->body, true); 
+        
         if(!$results){
             $error = json_last_error();
             throw new CakeException($error);
@@ -36,5 +51,20 @@ class TwitterUserTimelineSource extends DataSource
         }
         
         return array($model->alias => $results);
+    }
+    
+    /**
+     * Values for auth key for OAuth request
+     * @return array
+     */
+    protected function _get_auth()
+    {
+        return array(
+                  'method' => 'OAuth',
+                  'oauth_token' => Configure::read('oauth_token'),
+                  'oauth_token_secret' => Configure::read('oauth_token_secret'),
+                  'oauth_consumer_key' => Configure::read('oauth_consumer_key'),
+                  'oauth_consumer_secret' => Configure::read('oauth_consumer_secret')
+                  );
     }
 }
