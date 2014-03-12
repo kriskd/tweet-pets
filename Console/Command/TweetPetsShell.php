@@ -133,12 +133,13 @@ class TweetPetsShell extends AppShell
      */
     public function get_dchs_pets()
     {
-        App::import('Sanitize');
+        //App::import('Sanitize');
         $params = array('orderBy' => 'ID', 'primaryBreed' => 0, 'primaryBreed_none' => 0, 'primaryBreedcat' => 0,
                         'sex' => 'A', 'ageGroup' => 'All', 'site' => '', 'speciesID' => 0, 'task' => 'apply');
-        $results = $this->HttpSocket->post('http://www.giveshelter.org/component/adoptableanimalsearch/index.php?option=com_adoptableanimalsearch',
-                                    $params); 
-
+        
+        $url = 'https://www.giveshelter.org/index.php?option=com_adoptableanimalsearch&view=adoptableanimalsearchs';
+        $results = $this->HttpSocket->post($url, $params); 
+                                         
         $sanitize = $this->_strip_tags_f($results); 
         
         //Sample data
