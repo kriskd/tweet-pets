@@ -26,7 +26,7 @@ class TweetPetsShell extends AppShell
     public function insert_all_pets()
     {
         $dchs_pets = $this->get_dchs_pets();
-
+        
         if($dchs_pets){
             $pets_model['Pet'] = $dchs_pets;
             $this->Pet->saveAll($pets_model['Pet']);
@@ -141,7 +141,7 @@ class TweetPetsShell extends AppShell
         $results = $this->HttpSocket->post($url, $params); 
                                          
         $sanitize = $this->_strip_tags_f($results); 
-        
+
         //Sample data
         //ID: 5424002Name: MaxeySpecies: DogPrimaryBreed: Retriever, LabradorSecondaryBreed: Sex: FemaleSN: SpayedSite: Foster ProgramStage: NoFind out more about Maxey
         
@@ -151,7 +151,7 @@ class TweetPetsShell extends AppShell
         $attributes = array('ID', 'Name', 'Species', 'PrimaryBreed', 'SecondaryBreed', 'Gender', 'Age', 'Site', 'Find');
         for($i=0; $i<count($attributes); $i++){
             if($i < count($attributes)-1){
-                preg_match_all('/(?<=' . $attributes[$i] . ':)[\s\S]*?(?=' . $attributes[$i+1] . ':|Find)/', $sanitize, $matches);
+                preg_match_all('/(?<=\\w' . $attributes[$i] . ':)[\s\S]*?(?=' . $attributes[$i+1] . ':|Find|\<a)/', $sanitize, $matches);
                 $matches = array_shift($matches);
                 $data[$attributes[$i]] = $matches;
             }
