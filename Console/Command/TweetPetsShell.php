@@ -142,7 +142,7 @@ class TweetPetsShell extends AppShell
                                          
         $sanitize = $this->_strip_tags_f($results);
         $sanitize = preg_replace('/^\s+|\n|\r|\s+$/m', '', $sanitize);
-
+        
         //Sample data
         //ID: 5424002Name: MaxeySpecies: DogPrimaryBreed: Retriever, LabradorSecondaryBreed: Sex: FemaleSN: SpayedSite: Foster ProgramStage: NoFind out more about Maxey
         
@@ -154,6 +154,17 @@ class TweetPetsShell extends AppShell
             if($i < count($attributes)-1){
                 preg_match_all('/(?<=[\\w\\):]' . $attributes[$i] . ':)[\s\S]*?(?=' . $attributes[$i+1] . ':|Find|\<a)/', $sanitize, $matches);
                 $matches = array_shift($matches);
+                // When there is no secondary breed, an empty value is fetched as expected, but also junk up to the next look ahead
+                // Test with http://www.phpliveregex.com/
+                // So, manually go through matches deleting any value after an empty value
+                if ($attributes[$i]=='SecondaryBreed') {
+                    foreach ($matches as $j => $match) {
+                        if (empty($match)) {
+                            unset($matches[$j+1]);
+                        }
+                    }
+                    $matches = array_values($matches);
+                }
                 $data[$attributes[$i]] = $matches;
             }
         }
