@@ -140,7 +140,8 @@ class TweetPetsShell extends AppShell
         $url = 'https://www.giveshelter.org/index.php?option=com_adoptableanimalsearch&view=adoptableanimalsearchs';
         $results = $this->HttpSocket->post($url, $params); 
                                          
-        $sanitize = $this->_strip_tags_f($results); 
+        $sanitize = $this->_strip_tags_f($results);
+        $sanitize = preg_replace('/^\s+|\n|\r|\s+$/m', '', $sanitize);
 
         //Sample data
         //ID: 5424002Name: MaxeySpecies: DogPrimaryBreed: Retriever, LabradorSecondaryBreed: Sex: FemaleSN: SpayedSite: Foster ProgramStage: NoFind out more about Maxey
@@ -151,7 +152,7 @@ class TweetPetsShell extends AppShell
         $attributes = array('ID', 'Name', 'Species', 'PrimaryBreed', 'SecondaryBreed', 'Gender', 'Age', 'Site', 'Find');
         for($i=0; $i<count($attributes); $i++){
             if($i < count($attributes)-1){
-                preg_match_all('/(?<=\\w' . $attributes[$i] . ':)[\s\S]*?(?=' . $attributes[$i+1] . ':|Find|\<a)/', $sanitize, $matches);
+                preg_match_all('/(?<=[\\w\\):]' . $attributes[$i] . ':)[\s\S]*?(?=' . $attributes[$i+1] . ':|Find|\<a)/', $sanitize, $matches);
                 $matches = array_shift($matches);
                 $data[$attributes[$i]] = $matches;
             }
