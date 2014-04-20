@@ -26,7 +26,7 @@ class TweetPetsShell extends AppShell
     public function insert_all_pets()
     {
         $dchs_pets = $this->get_dchs_pets();
-        
+
         if($dchs_pets){
             $pets_model['Pet'] = $dchs_pets;
             $this->Pet->saveAll($pets_model['Pet']);
@@ -138,10 +138,15 @@ class TweetPetsShell extends AppShell
                         'sex' => 'A', 'ageGroup' => 'All', 'site' => '', 'speciesID' => 0, 'task' => 'apply');
         
         $url = 'https://www.giveshelter.org/index.php?option=com_adoptableanimalsearch&view=adoptableanimalsearchs';
-        $results = $this->HttpSocket->post($url, $params); 
-                                         
+        
+        $results = $this->HttpSocket->post($url, $params);
+        // Get HTML after closing head
+        $results = stristr($results, '</head>'); 
         $sanitize = $this->_strip_tags_f($results);
+        // Remove lines breaks and other white space
         $sanitize = preg_replace('/^\s+|\n|\r|\s+$/m', '', $sanitize);
+        // Get text starting with first ID
+        $sanitize = strstr($sanitize, 'ID:');
         
         //Sample data
         //ID: 5424002Name: MaxeySpecies: DogPrimaryBreed: Retriever, LabradorSecondaryBreed: Sex: FemaleSN: SpayedSite: Foster ProgramStage: NoFind out more about Maxey
@@ -152,7 +157,7 @@ class TweetPetsShell extends AppShell
         $attributes = array('ID', 'Name', 'Species', 'PrimaryBreed', 'SecondaryBreed', 'Gender', 'Age', 'Site', 'Find');
         for($i=0; $i<count($attributes); $i++){
             if($i < count($attributes)-1){
-                preg_match_all('/(?<=[\\w\\):]' . $attributes[$i] . ':)[\s\S]*?(?=' . $attributes[$i+1] . ':|Find|\<a)/', $sanitize, $matches);
+                preg_match_all('/(?<=' . $attributes[$i] . ':)[\s\S]*?(?=' . $attributes[$i+1] . ':|Find|\<a)/', $sanitize, $matches);
                 $matches = array_shift($matches);
                 // When there is no secondary breed, an empty value is fetched as expected, but also junk up to the next look ahead
                 // Test with http://www.phpliveregex.com/
@@ -317,13 +322,15 @@ class TweetPetsShell extends AppShell
         
         $full_tags = $matches[0];
         $tag_names = $matches[1];
-        
+
         foreach ($full_tags as $i => $full_tag) {
-            if (!in_array($tag_names[$i], $i_allowedtags))
-            if ($i_trimtext)
-            unset($full_tags[$i]);
-            else
-            $i_html = str_replace($full_tag, '', $i_html);
+            if (!in_array($tag_names[$i], $i_allowedtags)) { 
+                if ($i_trimtext) { 
+                    unset($full_tags[$i]);
+                } else { 
+                    $i_html = str_replace($full_tag, '', $i_html); 
+                }
+            }
         }
         
         return $i_trimtext ? implode('', $full_tags) : $i_html;
